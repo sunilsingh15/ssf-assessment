@@ -1,11 +1,40 @@
 package vttp2023.batch3.ssf.frontcontroller.services;
 
+import org.springframework.http.MediaType;
+import org.springframework.http.RequestEntity;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import vttp2023.batch3.ssf.frontcontroller.model.User;
+
+@Service
 public class AuthenticationService {
+
+	String apiURL = "https://authservice-production-e8b2.up.railway.app/api/authenticate";
 
 	// TODO: Task 2
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	// Write the authentication method in here
 	public void authenticate(String username, String password) throws Exception {
+
+		User user = new User(username, password);
+
+		RequestEntity<String> request = RequestEntity
+											.post(apiURL)
+											.contentType(MediaType.APPLICATION_JSON)
+											.body(user.toJSON().toString(), String.class);
+
+		RestTemplate template = new RestTemplate();
+		ResponseEntity<String> response = template.exchange(request, String.class);
+		
+		if (response.getStatusCode().is2xxSuccessful()) {
+			System.out.println("Successfully authenticated.");
+		}
+		else if (response.getStatusCode().is4xxClientError()) {
+			throw new Exception("Invalid login details!");
+		}
+
 	}
 
 	// TODO: Task 3

@@ -41,6 +41,9 @@
 			</tr>
 		</table>
 	</form>
+	<div th:if="${exception}" class="error-message">
+		<p th:text="${exception}" style="color: red;"></p>
+	</div>	
 </body>
 
 </html>
