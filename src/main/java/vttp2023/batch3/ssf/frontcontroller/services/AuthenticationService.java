@@ -2,6 +2,7 @@ package vttp2023.batch3.ssf.frontcontroller.services;
 
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -9,9 +10,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import vttp2023.batch3.ssf.frontcontroller.model.User;
+import vttp2023.batch3.ssf.frontcontroller.respositories.AuthenticationRepository;
 
 @Service
 public class AuthenticationService {
+
+	@Autowired
+	AuthenticationRepository repository;
 
 	String apiURL = "https://authservice-production-e8b2.up.railway.app/api/authenticate";
 
@@ -44,8 +49,8 @@ public class AuthenticationService {
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	// Write an implementation to disable a user account for 30 mins
 	public void disableUser(String username) {
+		repository.save(username);
 
-		
 	}
 
 	// TODO: Task 5
