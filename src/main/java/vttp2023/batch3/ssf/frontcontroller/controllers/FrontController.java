@@ -42,10 +42,10 @@ public class FrontController {
 			return "view0";
 		}
 
-		if (service.isLocked(user.getUsername())) {
-			model.addAttribute("locked", "You have been locked out for 30 minutes. Try again later.");
-			return "view0";
-		}
+		// if (service.isLocked(user.getUsername())) {
+		// 	model.addAttribute("locked", "You have been locked out for 30 minutes. Try again later.");
+		// 	return "view0";
+		// }
 
 		if (answer != null && answer.equals(service.checkCaptcha((String) session.getAttribute("captcha")))) {
 
