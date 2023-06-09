@@ -56,9 +56,9 @@ public class AuthenticationService {
 	// TODO: Task 5
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	// Write an implementation to check if a given user's login has been disabled
-	public boolean isLocked(String username) {
-		return this.repository.isUserDisabled(username);
-	}
+	// public boolean isLocked(String username) {
+	// 	return this.repository.isUserDisabled(username);
+	// }
 
 	public String generateCaptcha() {
 

@@ -19,14 +19,14 @@ public class AuthenticationRepository {
 		template.opsForValue().set(username, "User is disabled for 30 minutes", Duration.ofMinutes(30));
 	}
 
-	public boolean isUserDisabled(String username) {
-		String user = (String) template.opsForValue().get(username);
+	// public boolean isUserDisabled(String username) {
+	// 	String user = (String) template.opsForValue().get(username);
 
-		if (user != null) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// 	if (user != null) {
+	// 		return true;
+	// 	} else {
+	// 		return false;
+	// 	}
+	// }
 
 }
