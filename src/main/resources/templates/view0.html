@@ -33,6 +33,14 @@
 					<span class="error" data-th-if="${#fields.hasErrors('password')}" data-th-errors="*{password}" style="color: red;"></span>
 				</td>
 			</tr>
+			<tr th:if="${loginAttempts > 0}">
+				<td>
+					<label for="captcha">What is </label><span th:text="${captcha}" name="captcha"></span>?
+				</td>
+				<td>
+					<input type="text" size="30" name="captchaanswer" />
+				</td>
+			</tr>
 			<tr>
 				<td></td>
 				<td>

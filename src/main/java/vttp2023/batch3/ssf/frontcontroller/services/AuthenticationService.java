@@ -1,5 +1,7 @@
 package vttp2023.batch3.ssf.frontcontroller.services;
 
+import java.util.Random;
+
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +25,7 @@ public class AuthenticationService {
 		RequestEntity<String> request = RequestEntity
 											.post(apiURL)
 											.contentType(MediaType.APPLICATION_JSON)
+											.header("Accept", MediaType.APPLICATION_JSON_VALUE)
 											.body(user.toJSON().toString(), String.class);
 
 		RestTemplate template = new RestTemplate();
@@ -41,6 +44,8 @@ public class AuthenticationService {
 	// DO NOT CHANGE THE METHOD'S SIGNATURE
 	// Write an implementation to disable a user account for 30 mins
 	public void disableUser(String username) {
+
+		
 	}
 
 	// TODO: Task 5
@@ -48,5 +53,50 @@ public class AuthenticationService {
 	// Write an implementation to check if a given user's login has been disabled
 	public boolean isLocked(String username) {
 		return false;
+	}
+
+	public String generateCaptcha() {
+
+		StringBuilder captcha = new StringBuilder();
+		String[] expressions = {"+", "*"};  
+		Random r = new Random();
+
+		int num1 = r.nextInt(1, 50);
+		int num2 = r.nextInt(1, 50);
+
+		captcha.append(num1);
+		captcha.append(" ");
+		captcha.append(expressions[r.nextInt(1)]);
+		captcha.append(" ");
+		captcha.append(num2);
+
+		return captcha.toString();
+	}
+
+	public String checkCaptcha(String captcha) {
+
+		String[] captchaToArray = captcha.split(" ");
+		String expression = captchaToArray[1];
+        int num1 = Integer.parseInt(captchaToArray[0]);
+		int num2 = Integer.parseInt(captchaToArray[2]);
+		int answer = 0;
+
+            switch (expression) {
+                case "+":
+                    answer = num1 + num2;
+                    break;
+                case "-":
+                    answer = num1 - num2;
+                    break;
+                case "*":
+                    answer = num1 * num2;
+                    break;
+                case "/":
+                    answer = num1 / num2;
+                    break;
+            }
+
+		return String.valueOf(answer);
+
 	}
 }
