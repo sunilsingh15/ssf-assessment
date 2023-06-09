@@ -70,6 +70,8 @@ public class FrontController {
 			
 			if (loginAttempts == 3) {
 				service.disableUser(user.getUsername());
+				model.addAttribute("username", user.getUsername());
+				return "view2";
 			}
 
 			return "view0";
