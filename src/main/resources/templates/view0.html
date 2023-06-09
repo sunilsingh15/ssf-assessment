@@ -51,6 +51,7 @@
 	</form>
 	<div th:if="${exception}" class="error-message">
 		<p th:text="${exception}" style="color: red;"></p>
+		<span th:text="${locked}" style="color: brown;"></span>
 	</div>	
 </body>
 
