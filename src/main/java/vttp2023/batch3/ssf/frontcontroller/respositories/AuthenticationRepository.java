@@ -16,7 +16,7 @@ public class AuthenticationRepository {
 	private RedisTemplate<String, Object> template;
 
 	public void save(String username) {
-		template.opsForValue().set(username, "User is disabled for 30 minutes", Duration.ofSeconds(60));
+		template.opsForValue().set(username, "User is disabled for 30 minutes", Duration.ofMinutes(30));
 	}
 
 }
